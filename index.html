@@ -768,3 +768,178 @@ button.disabled=true;
 </body>
 
 </html>
+<!-- ========================================= -->
+<!-- 第二章：地震波產生 -->
+<!-- ========================================= -->
+
+<section id="chapter2">
+
+<div class="card">
+
+<h2>🔨 第二章：產生地震波</h2>
+
+<p>
+
+漢斯博士：
+
+<br><br>
+
+在真正的折射震測中，
+
+研究人員會利用鐵鎚敲擊鐵板，
+
+產生人工地震。
+
+今天，
+
+換你來試試看！
+
+</p>
+
+<div class="waveArea">
+
+<div id="hammer">
+
+🔨
+
+</div>
+
+<div id="ground">
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+</div>
+
+<div id="waveCircle"></div>
+
+</div>
+
+<br>
+
+<button
+
+id="hitButton"
+
+class="accept">
+
+🔨 敲擊地面
+
+</button>
+
+<p
+
+id="waveMessage"
+
+style="margin-top:20px;">
+
+等待開始...
+
+</p>
+
+</div>
+
+</section>
+/*======================================
+第二章
+======================================*/
+
+.waveArea{
+
+position:relative;
+
+height:260px;
+
+margin-top:40px;
+
+overflow:hidden;
+
+}
+
+#hammer{
+
+font-size:80px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+#ground{
+
+margin-top:40px;
+
+font-size:26px;
+
+text-align:center;
+
+letter-spacing:3px;
+
+}
+
+#waveCircle{
+
+position:absolute;
+
+left:50%;
+
+top:120px;
+
+width:30px;
+
+height:30px;
+
+margin-left:-15px;
+
+border-radius:50%;
+
+border:4px solid #00e5ff;
+
+opacity:0;
+
+}
+  /*======================================
+第二章
+======================================*/
+
+const hitButton=document.getElementById("hitButton");
+
+const hammer=document.getElementById("hammer");
+
+const wave=document.getElementById("waveCircle");
+
+const waveMessage=document.getElementById("waveMessage");
+
+hitButton.onclick=function(){
+
+hammer.style.transform="rotate(-35deg)";
+
+wave.style.transition="none";
+
+wave.style.opacity="1";
+
+wave.style.width="20px";
+wave.style.height="20px";
+
+wave.style.marginLeft="-10px";
+
+setTimeout(()=>{
+
+hammer.style.transform="rotate(0deg)";
+
+wave.style.transition="1.2s";
+
+wave.style.width="350px";
+wave.style.height="350px";
+
+wave.style.marginLeft="-175px";
+
+wave.style.opacity="0";
+
+waveMessage.innerHTML=
+
+"🌊 地震波已經向四周傳播！";
+
+},80);
+
+}
