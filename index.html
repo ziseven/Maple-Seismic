@@ -396,6 +396,77 @@ display:none;
 }
 
 /*======================================
+/*======================================
+NPC
+======================================*/
+
+.npc-area{
+
+display:flex;
+
+gap:35px;
+
+align-items:center;
+
+flex-wrap:wrap;
+
+}
+
+.npc-avatar{
+
+width:150px;
+
+height:150px;
+
+border-radius:50%;
+
+background:
+
+linear-gradient(
+
+180deg,
+
+#ffe082,
+
+#ffca28
+
+);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:70px;
+
+box-shadow:
+
+0 0 25px gold;
+
+}
+
+.dialog-box{
+
+flex:1;
+
+background:#18314d;
+
+padding:30px;
+
+border-radius:20px;
+
+min-height:220px;
+
+}
+
+.dialog-box p{
+
+font-size:24px;
+
+line-height:2;
+
+}
 Footer
 ======================================*/
 
@@ -469,37 +540,49 @@ class="start-btn">
 
 <h2>
 
-🎮 第一章：接受任務
+🧙 第一章：漢斯博士
 
 </h2>
 
-<p>
+<div class="npc-area">
 
-🧙 漢斯博士：
+<div class="npc-avatar">
 
-<br><br>
+🧙
 
-歡迎冒險家！
+</div>
 
-地下可能藏著未知的岩層。
+<div class="dialog-box">
 
-但是，
+<p id="dialogText">
 
-我們不能把整片土地都挖開。
-
-唯一的方法，
-
-就是利用「地震波」
-
-去探索地下世界。
+......
 
 </p>
 
-<div class="quest">
+<button
+
+id="nextDialog"
+
+class="accept">
+
+下一句 ▶
+
+</button>
+
+</div>
+
+</div>
+
+<div class="quest"
+
+id="questBox"
+
+style="display:none;">
 
 <h3>
 
-📜 今日任務
+📜 Quest
 
 </h3>
 
@@ -507,15 +590,15 @@ class="start-btn">
 
 <p>
 
-✔ 了解什麼是地震波
+✔ 學習什麼是地震波
 
 <br>
 
-✔ 學會折射原理
+✔ 找到地下高速地層
 
 <br>
 
-✔ 完成地下探測
+✔ 完成折射震測
 
 </p>
 
@@ -556,9 +639,6 @@ EXP +10
 </div>
 
 </div>
-
-</section>
-
 <footer>
 
 Made with ❤️ for Maple Seismic Adventure
@@ -618,6 +698,51 @@ bg.appendChild(leaf);
 /*=========================
 Quest
 =========================*/
+const dialogs=[
+
+"歡迎冒險家。",
+
+"我是漢斯博士。",
+
+"今天我們不是來打王。",
+
+"今天我們要探索地下世界。",
+
+"但是不能直接挖。",
+
+"唯一的方法就是利用地震波。",
+
+"你願意接受任務嗎？"
+
+];
+
+let dialogIndex=0;
+
+const dialogText=document.getElementById("dialogText");
+
+const nextDialog=document.getElementById("nextDialog");
+
+const questBox=document.getElementById("questBox");
+
+dialogText.innerHTML=dialogs[0];
+
+nextDialog.onclick=function(){
+
+dialogIndex++;
+
+if(dialogIndex<dialogs.length){
+
+dialogText.innerHTML=dialogs[dialogIndex];
+
+}else{
+
+nextDialog.style.display="none";
+
+questBox.style.display="block";
+
+}
+
+}
 
 const button=document.getElementById("acceptQuest");
 
@@ -631,11 +756,12 @@ exp.style.width="10%";
 
 status.style.display="block";
 
-button.disabled=true;
-
 button.innerHTML="任務已接受";
 
+button.disabled=true;
+
 }
+
 
 </script>
 
