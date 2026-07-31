@@ -1,37 +1,57 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>🍁 Maple Seismic Adventure</title>
 
+<!-- Google Font -->
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap"
+rel="stylesheet">
+
 <style>
 
+/*======================================
+Reset
+======================================*/
+
 *{
+
 margin:0;
 padding:0;
 box-sizing:border-box;
+
 }
 
 html{
+
 scroll-behavior:smooth;
+
 }
 
 body{
 
-font-family:
-"Segoe UI",
-"Noto Sans TC",
-sans-serif;
+font-family:'Noto Sans TC',sans-serif;
 
 background:
-
 linear-gradient(
 180deg,
-#05142b,
-#102d58,
-#1b4a75);
+#081726,
+#0d2b45,
+#163b63);
 
 color:white;
 
@@ -39,18 +59,27 @@ overflow-x:hidden;
 
 }
 
-/* 星空 */
+/*======================================
+背景
+======================================*/
 
-.stars{
+#background{
 
 position:fixed;
+
 left:0;
 top:0;
+
 width:100%;
 height:100%;
-pointer-events:none;
+
+overflow:hidden;
+
+z-index:-2;
 
 }
+
+/* 星空 */
 
 .star{
 
@@ -60,17 +89,31 @@ background:white;
 
 border-radius:50%;
 
-animation:twinkle 3s infinite;
+opacity:.8;
+
+animation:twinkle 4s infinite;
 
 }
 
 @keyframes twinkle{
 
-0%{opacity:.2;}
+0%{
 
-50%{opacity:1;}
+opacity:.2;
 
-100%{opacity:.2;}
+}
+
+50%{
+
+opacity:1;
+
+}
+
+100%{
+
+opacity:.2;
+
+}
 
 }
 
@@ -78,15 +121,11 @@ animation:twinkle 3s infinite;
 
 .leaf{
 
-position:fixed;
-
-top:-50px;
+position:absolute;
 
 font-size:24px;
 
 animation:fall linear infinite;
-
-pointer-events:none;
 
 opacity:.8;
 
@@ -97,7 +136,8 @@ opacity:.8;
 0%{
 
 transform:
-translateY(-50px)
+
+translateY(-60px)
 rotate(0deg);
 
 }
@@ -105,6 +145,7 @@ rotate(0deg);
 100%{
 
 transform:
+
 translateY(110vh)
 rotate(360deg);
 
@@ -112,7 +153,11 @@ rotate(360deg);
 
 }
 
-header{
+/*======================================
+Hero
+======================================*/
+
+.hero{
 
 height:100vh;
 
@@ -122,147 +167,192 @@ justify-content:center;
 
 align-items:center;
 
-text-align:center;
-
-padding:40px;
+padding:30px;
 
 }
 
-.hero{
+.hero-card{
 
-max-width:900px;
+width:min(900px,95%);
+
+background:
+
+rgba(255,255,255,.08);
 
 backdrop-filter:blur(15px);
 
-background:rgba(255,255,255,.08);
-
-border:1px solid rgba(255,255,255,.2);
+border-radius:25px;
 
 padding:60px;
 
-border-radius:30px;
+text-align:center;
+
+border:1px solid rgba(255,255,255,.2);
 
 box-shadow:
-0 0 30px rgba(0,0,0,.3);
+
+0 20px 60px rgba(0,0,0,.35);
 
 }
 
-h1{
+.hero h1{
 
 font-size:60px;
 
-margin-bottom:20px;
+margin-bottom:25px;
 
 }
 
-.subtitle{
+.hero p{
 
-font-size:24px;
-
-opacity:.8;
+font-size:22px;
 
 line-height:1.8;
 
+opacity:.9;
+
 }
 
-.button{
-
-margin-top:40px;
+.start-btn{
 
 display:inline-block;
+
+margin-top:40px;
 
 padding:
 
 18px
-40px;
+45px;
 
 border-radius:50px;
+
+text-decoration:none;
+
+font-size:22px;
+
+font-weight:bold;
 
 background:
 
 linear-gradient(
 90deg,
-#ffd84d,
+#ffe066,
 #ffb300);
 
-color:black;
-
-font-weight:bold;
-
-text-decoration:none;
+color:#222;
 
 transition:.3s;
 
 }
 
-.button:hover{
+.start-btn:hover{
 
-transform:scale(1.08);
+transform:
+
+translateY(-5px)
+scale(1.05);
 
 }
+
+/*======================================
+章節
+======================================*/
 
 section{
 
 padding:
 
-120px
+100px
 10%;
 
 }
 
 .card{
 
+max-width:1000px;
+
+margin:auto;
+
 background:
 
 rgba(255,255,255,.08);
 
-backdrop-filter:blur(10px);
+padding:50px;
 
 border-radius:25px;
 
-padding:40px;
-
-margin-bottom:50px;
-
-border:1px solid rgba(255,255,255,.15);
+backdrop-filter:blur(12px);
 
 }
 
-h2{
+.card h2{
+
+font-size:42px;
 
 margin-bottom:25px;
 
-font-size:40px;
-
-color:#ffe86b;
+color:#ffe066;
 
 }
 
-p{
+.card p{
+
+font-size:22px;
 
 line-height:2;
 
-font-size:20px;
-
 }
+
+/*======================================
+Quest
+======================================*/
 
 .quest{
 
-margin-top:30px;
+margin-top:40px;
 
-background:#2b1f13;
+padding:30px;
+
+border-radius:20px;
+
+background:#1c2b3c;
 
 border-left:8px solid gold;
 
-padding:25px;
+}
 
-border-radius:15px;
+.accept{
+
+margin-top:30px;
+
+padding:
+
+15px
+40px;
+
+font-size:20px;
+
+border:none;
+
+border-radius:50px;
+
+background:#ffd54f;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.accept:hover{
+
+transform:scale(1.05);
 
 }
 
 .exp{
 
-width:100%;
+margin-top:30px;
 
 height:25px;
 
@@ -272,127 +362,46 @@ border-radius:30px;
 
 overflow:hidden;
 
-margin-top:20px;
-
 }
 
-.exp span{
+.expFill{
 
-display:block;
+width:0%;
 
 height:100%;
-
-width:10%;
 
 background:
 
 linear-gradient(
 90deg,
-#00ff8c,
+#00e676,
 #00c853);
 
-}
-
-.wave{
-
-margin-top:40px;
-
-height:250px;
-
-position:relative;
+transition:1s;
 
 }
 
-.layer1{
+.status{
 
-position:absolute;
+margin-top:20px;
 
-top:0;
+font-size:22px;
 
-height:120px;
+font-weight:bold;
 
-width:100%;
+color:#9cffc5;
 
-background:#67b26f;
-
-}
-
-.layer2{
-
-position:absolute;
-
-bottom:0;
-
-height:130px;
-
-width:100%;
-
-background:#7d5a50;
+display:none;
 
 }
 
-.ball{
-
-position:absolute;
-
-width:20px;
-
-height:20px;
-
-background:red;
-
-border-radius:50%;
-
-left:20px;
-
-top:40px;
-
-animation:move 5s infinite;
-
-}
-
-@keyframes move{
-
-0%{
-
-left:20px;
-top:40px;
-
-}
-
-25%{
-
-left:200px;
-top:90px;
-
-}
-
-50%{
-
-left:450px;
-top:180px;
-
-}
-
-75%{
-
-left:700px;
-top:80px;
-
-}
-
-100%{
-
-left:900px;
-top:40px;
-
-}
-
-}
+/*======================================
+Footer
+======================================*/
 
 footer{
 
-padding:80px;
+padding:50px;
 
 text-align:center;
 
@@ -406,24 +415,41 @@ opacity:.6;
 
 <body>
 
-<div class="stars"></div>
+<!--==================================
+背景
+===================================-->
 
-<header>
+<div id="background"></div>
 
-<div class="hero">
+<!--==================================
+首頁
+===================================-->
 
-<h1>🍁 Maple Seismic Adventure</h1>
+<header class="hero">
 
-<p class="subtitle">
+<div class="hero-card">
 
-把折射震測學成像玩新楓之谷一樣簡單。
+<h1>
 
-今天，你將化身為冒險家，
-利用地震波尋找地下的秘密地層。
+🍁 Maple Seismic Adventure
+
+</h1>
+
+<p>
+
+歡迎來到楓之谷世界！
+
+今天，你將化身成探勘冒險家，
+
+跟著漢斯博士利用地震波，
+
+找出地下真正的秘密。
 
 </p>
 
-<a class="button" href="#chapter1">
+<a
+href="#chapter1"
+class="start-btn">
 
 開始冒險 ▼
 
@@ -433,1187 +459,141 @@ opacity:.6;
 
 </header>
 
+<!--==================================
+第一章
+===================================-->
+
 <section id="chapter1">
 
 <div class="card">
 
-<h2>🎮 第一章：接受任務</h2>
+<h2>
+
+🎮 第一章：接受任務
+
+</h2>
 
 <p>
 
-你來到了楓之谷世界。
+🧙 漢斯博士：
 
-NPC「漢斯博士」交給你一個任務：
+<br><br>
 
-「我們懷疑地下有不同的岩層，
-但不能把整片土地挖開。
+歡迎冒險家！
 
-請利用地震波找到真正的位置！」
+地下可能藏著未知的岩層。
+
+但是，
+
+我們不能把整片土地都挖開。
+
+唯一的方法，
+
+就是利用「地震波」
+
+去探索地下世界。
 
 </p>
 
 <div class="quest">
 
-<h3>📜 Quest</h3>
+<h3>
+
+📜 今日任務
+
+</h3>
+
+<br>
 
 <p>
 
-✔ 理解什麼是地震波
+✔ 了解什麼是地震波
 
 <br>
 
-✔ 為什麼不同地層速度不同
+✔ 學會折射原理
 
 <br>
 
-✔ 找到地下高速地層
+✔ 完成地下探測
 
 </p>
+
+<button
+
+class="accept"
+
+id="acceptQuest">
+
+接受任務
+
+</button>
 
 <div class="exp">
 
-<span id="expBar"></span>
+<div
+
+class="expFill"
+
+id="expFill">
+
+</div>
+
+</div>
+
+<div
+
+class="status"
+
+id="status">
+
+🎉 Quest Accepted！
+
+EXP +10
 
 </div>
 
 </div>
 
 </div>
-
-</section>
-
-<section>
-
-<div class="card">
-
-<h2>⚔ 第二章：地震波就像角色跑步</h2>
-
-<p>
-
-想像你正在弓箭手村跑步。
-
-草地很難跑，
-
-速度只有每秒 3 公尺。
-
-但是如果突然跑到高速公路，
-
-速度立刻提升。
-
-地震波也是一樣。
-
-不同地層，
-
-速度完全不同。
-
-</p>
-
-<div class="wave">
-
-<div class="layer1"></div>
-
-<div class="layer2"></div>
-
-<div class="ball"></div>
-
-</div>
-
-</div>
-  <!-- ========================= -->
-<!-- 第三章 -->
-<!-- ========================= -->
-
-<section id="chapter3">
-
-<div class="card">
-
-<h2>🌎 第三章：什麼是折射？</h2>
-
-<p>
-
-想像你正在新楓之谷的<strong>冰原雪域</strong>。
-
-你原本在雪地上奔跑。
-
-忽然踩到一條高速冰道。
-
-你的速度突然增加。
-
-由於速度改變，
-
-前進方向也跟著改變。
-
-這就是
-
-<strong>折射 (Refraction)</strong>
-
-</p>
-
-<div class="refraction-demo">
-
-<div class="ground top">
-
-地層一（速度 V₁）
-
-</div>
-
-<div class="ground bottom">
-
-地層二（速度 V₂）
-
-</div>
-
-<div class="wave-dot"></div>
-
-</div>
-
-<p>
-
-如果
-
-<b>V₂ ＞ V₁</b>
-
-地震波就會想辦法利用下面的高速地層前進。
-
-是不是很像楓之谷玩家
-
-知道有傳送門一定先去搭？
-
-</p>
-
-</div>
-
-</section>
-
-<style>
-
-.refraction-demo{
-
-position:relative;
-
-height:350px;
-
-margin-top:40px;
-
-overflow:hidden;
-
-border-radius:20px;
-
-background:#111;
-
-}
-
-.ground{
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:26px;
-
-font-weight:bold;
-
-}
-
-.top{
-
-height:45%;
-
-background:#5da769;
-
-}
-
-.bottom{
-
-height:55%;
-
-background:#80624b;
-
-}
-
-.wave-dot{
-
-position:absolute;
-
-width:18px;
-
-height:18px;
-
-border-radius:50%;
-
-background:#ff4444;
-
-animation:refractionMove 7s infinite linear;
-
-box-shadow:0 0 15px red;
-
-}
-
-@keyframes refractionMove{
-
-0%{
-
-left:20px;
-top:60px;
-
-}
-
-30%{
-
-left:220px;
-top:140px;
-
-}
-
-60%{
-
-left:520px;
-top:250px;
-
-}
-
-80%{
-
-left:720px;
-top:130px;
-
-}
-
-100%{
-
-left:950px;
-top:70px;
-
-}
-
-}
-
-</style>
-
-
-<!-- ========================= -->
-<!-- 第四章 -->
-<!-- ========================= -->
-
-<section>
-
-<div class="card">
-
-<h2>🚪 第四章：臨界折射波</h2>
-
-<p>
-
-一般玩家跑地圖：
-
-一直走。
-
-但是老玩家呢？
-
-一定會利用
-
-<b>傳送門</b>
-
-或
-
-<b>瞬移</b>
-
-讓整體速度變快。
-
-地震波也是。
-
-它不是傻傻一直走。
-
-而是：
-
-</p>
-
-<div class="timeline">
-
-<div class="step">
-
-①
-
-<br>
-
-向下跑
-
-</div>
-
-<div class="arrow">
-
-↓
-
-</div>
-
-<div class="step">
-
-②
-
-<br>
-
-高速地層
-
-</div>
-
-<div class="arrow">
-
-↓
-
-</div>
-
-<div class="step">
-
-③
-
-<br>
-
-折射回地表
-
-</div>
-
-</div>
-
-<p>
-
-這就是
-
-<b>臨界折射波</b>
-
-也是折射震測最重要的概念。
-
-</p>
-
-</div>
-
-</section>
-
-<style>
-
-.timeline{
-
-display:flex;
-
-justify-content:space-around;
-
-align-items:center;
-
-margin-top:50px;
-
-flex-wrap:wrap;
-
-}
-
-.step{
-
-width:180px;
-
-height:180px;
-
-border-radius:20px;
-
-background:#1d3557;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
-
-font-size:28px;
-
-transition:.3s;
-
-cursor:pointer;
-
-}
-
-.step:hover{
-
-transform:translateY(-10px);
-
-background:#457b9d;
-
-}
-
-.arrow{
-
-font-size:45px;
-
-color:#ffd54f;
-
-}
-
-</style>
-
-
-
-<!-- ========================= -->
-<!-- 第五章 -->
-<!-- ========================= -->
-
-<section>
-
-<div class="card">
-
-<h2>📈 第五章：走時曲線</h2>
-
-<p>
-
-這是折射震測最重要的一張圖。
-
-但是不用怕。
-
-我們把它變成楓之谷！
-
-</p>
-
-<canvas id="travelTime"
-
-width="900"
-
-height="450">
-
-</canvas>
-
-<p>
-
-🟦 藍線
-
-代表
-
-直達波。
-
-一路自己跑。
-
-<br><br>
-
-🟨 黃線
-
-代表
-
-折射波。
-
-先利用高速地層。
-
-所以跑得更快。
-
-</p>
-
-</div>
-
-</section>
-
-<style>
-
-canvas{
-
-background:white;
-
-border-radius:20px;
-
-width:100%;
-
-margin-top:30px;
-
-}
-
-</style>
-
-<script>
-
-const canvas=document.getElementById("travelTime");
-
-if(canvas){
-
-const c=canvas.getContext("2d");
-
-c.lineWidth=5;
-
-// X軸
-
-c.strokeStyle="#333";
-
-c.beginPath();
-
-c.moveTo(60,390);
-
-c.lineTo(850,390);
-
-c.stroke();
-
-// Y軸
-
-c.beginPath();
-
-c.moveTo(60,390);
-
-c.lineTo(60,40);
-
-c.stroke();
-
-// 第一條
-
-c.strokeStyle="#1976d2";
-
-c.beginPath();
-
-c.moveTo(60,380);
-
-c.lineTo(780,120);
-
-c.stroke();
-
-// 第二條
-
-c.strokeStyle="#ff9800";
-
-c.beginPath();
-
-c.moveTo(280,330);
-
-c.lineTo(820,170);
-
-c.stroke();
-
-c.fillStyle="#222";
-
-c.font="20px sans-serif";
-
-c.fillText("時間",5,30);
-
-c.fillText("距離",820,420);
-
-}
-
-</script>
-
-
-
-<!-- ========================= -->
-<!-- 第六章 -->
-<!-- ========================= -->
-
-<section>
-
-<div class="card">
-
-<h2>🏆 第六章：超越距離</h2>
-
-<p>
-
-你有沒有玩過楓之谷時：
-
-明明目標很遠，
-
-卻利用傳送門反而更快抵達？
-
-這就是
-
-<b>超越距離</b>
-
-</p>
-
-<div class="quest">
-
-<h3>🍁 Maple 比喻</h3>
-
-<p>
-
-近距離：
-
-🚶 一直走
-
-<br><br>
-
-遠距離：
-
-🚶 走一小段
-
-➡ 傳送門
-
-⚡ 高速移動
-
-🚶 再走一小段
-
-<br><br>
-
-因此，
-
-反而更快。
-
-</p>
-
-</div>
-
-</div>
-
-</section>
 
 </section>
 
 <footer>
 
-Maple Seismic Adventure v1.0
+Made with ❤️ for Maple Seismic Adventure
 
 </footer>
 
 <script>
-  <!-- ===================================== -->
-<!-- 第七章 -->
-<!-- ===================================== -->
 
-<section id="chapter7">
+/*=========================
+背景
+=========================*/
 
-<div class="card">
+const bg=document.getElementById("background");
 
-<h2>🔨 第七章：開始實驗！</h2>
-
-<p>
-
-真正的折射震測不是電腦模擬。
-
-而是真的到戶外。
-
-今天你就是 Maple 世界的探勘隊隊長。
-
-你的任務：
-
-找到地下的隱藏地層！
-
-</p>
-
-<div class="missionBoard">
-
-<div class="mission done">
-
-✅ 展開測線
-
-</div>
-
-<div class="mission">
-
-📍 放置24支地震儀
-
-</div>
-
-<div class="mission">
-
-🔨 敲擊鐵板
-
-</div>
-
-<div class="mission">
-
-📡 收集地震波
-
-</div>
-
-<div class="mission">
-
-🏆 推算地下地層
-
-</div>
-
-</div>
-
-<button id="nextMission">
-
-開始下一步 ▶
-
-</button>
-
-</div>
-
-</section>
-
-<style>
-
-.missionBoard{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-
-gap:20px;
-
-margin-top:40px;
-
-}
-
-.mission{
-
-padding:30px;
-
-background:#283747;
-
-border-radius:20px;
-
-transition:.4s;
-
-font-size:22px;
-
-}
-
-.done{
-
-background:#27ae60;
-
-}
-
-button{
-
-padding:15px 35px;
-
-margin-top:40px;
-
-font-size:20px;
-
-background:#ffd54f;
-
-border:none;
-
-border-radius:40px;
-
-cursor:pointer;
-
-}
-
-button:hover{
-
-transform:scale(1.05);
-
-}
-
-</style>
-
-<script>
-
-const missions=document.querySelectorAll(".mission");
-
-let step=1;
-
-document.getElementById("nextMission").onclick=function(){
-
-if(step<missions.length){
-
-missions[step].classList.add("done");
-
-step++;
-
-}
-
-}
-
-</script>
-
-
-
-<!-- ===================================== -->
-<!-- 第八章 -->
-<!-- ===================================== -->
-
-<section>
-
-<div class="card">
-
-<h2>📍 第八章：放置地震儀</h2>
-
-<p>
-
-在真正的實驗中，
-
-研究人員每隔固定距離，
-
-放置一支地震儀。
-
-你的 PDF 使用的是
-
-<b>24個通道</b>
-
-也就是24支地震儀。
-
-</p>
-
-<div class="geoLine">
-
-</div>
-
-<p>
-
-每一支都像隊伍中的一位隊友。
-
-當地震波經過，
-
-大家都會回報：
-
-「我收到了！」
-
-</p>
-
-</div>
-
-</section>
-
-<style>
-
-.geoLine{
-
-display:flex;
-
-justify-content:space-between;
-
-margin-top:50px;
-
-flex-wrap:wrap;
-
-}
-
-.sensor{
-
-width:22px;
-
-height:70px;
-
-background:#3498db;
-
-border-radius:10px;
-
-animation:jump 1.5s infinite;
-
-}
-
-@keyframes jump{
-
-0%{
-
-transform:translateY(0);
-
-}
-
-50%{
-
-transform:translateY(-10px);
-
-}
-
-100%{
-
-transform:translateY(0);
-
-}
-
-}
-
-</style>
-
-<script>
-
-const line=document.querySelector(".geoLine");
-
-for(let i=0;i<24;i++){
-
-let s=document.createElement("div");
-
-s.className="sensor";
-
-s.style.animationDelay=(i*0.1)+"s";
-
-line.appendChild(s);
-
-}
-
-</script>
-
-
-
-<!-- ===================================== -->
-<!-- 第九章 -->
-<!-- ===================================== -->
-
-<section>
-
-<div class="card">
-
-<h2>🔨 第九章：敲擊鐵板</h2>
-
-<p>
-
-這一步最像 MapleStory！
-
-拿起你的巨錘，
-
-用力敲下去！
-
-</p>
-
-<div class="hammerArea">
-
-<div id="hammer">
-
-🔨
-
-</div>
-
-<div id="plate">
-
-⬛
-
-</div>
-
-</div>
-
-<p id="waveText">
-
-點擊鐵鎚開始。
-
-</p>
-
-</div>
-
-</section>
-
-<style>
-
-.hammerArea{
-
-height:250px;
-
-position:relative;
-
-}
-
-#hammer{
-
-position:absolute;
-
-left:45%;
-
-font-size:70px;
-
-cursor:pointer;
-
-transition:.2s;
-
-}
-
-#plate{
-
-position:absolute;
-
-bottom:40px;
-
-left:47%;
-
-font-size:80px;
-
-}
-
-.shake{
-
-animation:shake .25s;
-
-}
-
-@keyframes shake{
-
-0%{transform:rotate(0deg);}
-25%{transform:rotate(-20deg);}
-50%{transform:rotate(15deg);}
-75%{transform:rotate(-10deg);}
-100%{transform:rotate(0);}
-
-}
-
-</style>
-
-<script>
-
-hammer.onclick=function(){
-
-hammer.classList.add("shake");
-
-waveText.innerHTML="🌊 地震波發射成功！";
-
-setTimeout(()=>{
-
-hammer.classList.remove("shake");
-
-},250);
-
-}
-
-</script>
-
-
-
-<!-- ===================================== -->
-<!-- 第十章 -->
-<!-- ===================================== -->
-
-<section>
-
-<div class="card">
-
-<h2>📡 第十章：地震波開始傳播</h2>
-
-<p>
-
-現在，
-
-24支地震儀開始等待。
-
-誰最先收到訊號？
-
-</p>
-
-<div id="receiveArea">
-
-</div>
-
-</div>
-
-</section>
-
-<style>
-
-.receiver{
-
-display:inline-block;
-
-margin:10px;
-
-padding:12px;
-
-border-radius:15px;
-
-background:#2c3e50;
-
-color:white;
-
-transition:.5s;
-
-}
-
-.receive{
-
-background:#2ecc71;
-
-transform:scale(1.15);
-
-}
-
-</style>
-
-<script>
-
-const area=document.getElementById("receiveArea");
-
-let list=[];
-
-for(let i=1;i<=24;i++){
-
-let d=document.createElement("div");
-
-d.className="receiver";
-
-d.innerHTML="G"+i;
-
-area.appendChild(d);
-
-list.push(d);
-
-}
-
-let t=0;
-
-setInterval(()=>{
-
-if(t<24){
-
-list[t].classList.add("receive");
-
-t++;
-
-}
-
-},400);
-
-</script>
-  
-/*================ NPC ================*/
-
-.npcBox{
-
-display:flex;
-gap:30px;
-align-items:center;
-margin-top:40px;
-
-}
-
-.npc{
-
-width:140px;
-height:140px;
-border-radius:50%;
-background:linear-gradient(#ffe082,#ffca28);
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:70px;
-
-box-shadow:0 0 25px gold;
-
-}
-
-.dialog{
-
-flex:1;
-
-background:#13233d;
-
-padding:30px;
-
-border-radius:20px;
-
-min-height:150px;
-
-font-size:22px;
-
-line-height:1.8;
-
-}
-
-.nextBtn{
-
-margin-top:20px;
-
-}
-const stars=document.querySelector(".stars");
-
-for(let i=0;i<200;i++){
+for(let i=0;i<180;i++){
 
 let s=document.createElement("div");
 
 s.className="star";
 
-s.style.width=Math.random()*3+"px";
-s.style.height=s.style.width;
+let size=Math.random()*3+1;
+
+s.style.width=size+"px";
+s.style.height=size+"px";
 
 s.style.left=Math.random()*100+"%";
 s.style.top=Math.random()*100+"%";
 
 s.style.animationDelay=Math.random()*5+"s";
 
-stars.appendChild(s);
+bg.appendChild(s);
 
 }
 
-for(let i=0;i<20;i++){
+for(let i=0;i<18;i++){
 
 let leaf=document.createElement("div");
 
@@ -1624,26 +604,41 @@ leaf.innerHTML="🍁";
 leaf.style.left=Math.random()*100+"vw";
 
 leaf.style.animationDuration=
+
 8+Math.random()*8+"s";
 
 leaf.style.animationDelay=
-Math.random()*10+"s";
 
-document.body.appendChild(leaf);
+Math.random()*8+"s";
+
+bg.appendChild(leaf);
 
 }
 
-let exp=10;
+/*=========================
+Quest
+=========================*/
 
-document.querySelector(".button").onclick=()=>{
+const button=document.getElementById("acceptQuest");
 
-exp=20;
+const exp=document.getElementById("expFill");
 
-document.getElementById("expBar").style.width=exp+"%";
+const status=document.getElementById("status");
 
-};
+button.onclick=function(){
+
+exp.style.width="10%";
+
+status.style.display="block";
+
+button.disabled=true;
+
+button.innerHTML="任務已接受";
+
+}
 
 </script>
 
 </body>
+
 </html>
