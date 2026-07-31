@@ -538,6 +538,63 @@ border:4px solid #00e5ff;
 opacity:0;
 
 }
+  /*======================================
+第三章
+======================================*/
+
+.sensorArea{
+
+margin-top:45px;
+
+display:grid;
+
+grid-template-columns:repeat(6,1fr);
+
+gap:20px;
+
+}
+
+.sensor{
+
+height:80px;
+
+border-radius:18px;
+
+background:#20344d;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:22px;
+
+transition:.35s;
+
+border:2px solid #35506d;
+
+}
+
+.sensor.active{
+
+background:#00c853;
+
+transform:scale(1.08);
+
+box-shadow:0 0 18px #00ff88;
+
+color:white;
+
+}
+
+.sensor.done{
+
+background:#ffca28;
+
+color:#222;
+
+}
 </style>
 
 </head>
@@ -771,6 +828,61 @@ style="margin-top:20px;">
 </div>
 
 </section>
+  <!-- ========================================= -->
+<!-- 第三章：24支地震儀 -->
+<!-- ========================================= -->
+
+<section id="chapter3">
+
+<div class="card">
+
+<h2>📡 第三章：24 支地震儀</h2>
+
+<p>
+
+地震波發射出去之後，
+
+24 支地震儀會開始等待。
+
+當地震波經過時，
+
+每一支都會依序收到訊號。
+
+</p>
+
+<div class="sensorArea" id="sensorArea">
+
+</div>
+
+<br>
+
+<div style="text-align:center;">
+
+<button
+
+class="accept"
+
+id="startSensor">
+
+📡 開始接收地震波
+
+</button>
+
+</div>
+
+<p
+
+id="sensorMessage"
+
+style="margin-top:25px;text-align:center;">
+
+等待開始...
+
+</p>
+
+</div>
+
+</section>
 </footer>
 
 <script>
@@ -933,6 +1045,69 @@ waveMessage.innerHTML=
 "🌊 地震波已經向四周傳播！";
 
 },80);
+
+}
+  /*======================================
+第三章
+======================================*/
+
+const sensorArea=document.getElementById("sensorArea");
+
+const sensors=[];
+
+for(let i=1;i<=24;i++){
+
+let div=document.createElement("div");
+
+div.className="sensor";
+
+div.innerHTML="📍 G"+i;
+
+sensorArea.appendChild(div);
+
+sensors.push(div);
+
+}
+
+const startSensor=document.getElementById("startSensor");
+
+const sensorMessage=document.getElementById("sensorMessage");
+
+startSensor.onclick=function(){
+
+startSensor.disabled=true;
+
+sensorMessage.innerHTML="🌊 地震波傳播中...";
+
+let index=0;
+
+const timer=setInterval(()=>{
+
+if(index>0){
+
+sensors[index-1].classList.remove("active");
+
+sensors[index-1].classList.add("done");
+
+}
+
+if(index<24){
+
+sensors[index].classList.add("active");
+
+index++;
+
+}else{
+
+clearInterval(timer);
+
+sensorMessage.innerHTML=
+
+"🎉 所有地震儀都收到地震波！";
+
+}
+
+},250);
 
 }
 </script>
