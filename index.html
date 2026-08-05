@@ -642,6 +642,29 @@ background:rgba(255,255,255,.12);
 transition:.3s;
 
 }
+  /*======================================
+第五章
+======================================*/
+
+.graphArea{
+
+margin-top:40px;
+
+overflow:auto;
+
+}
+
+#travelCanvas{
+
+width:100%;
+
+background:#13263f;
+
+border-radius:20px;
+
+border:2px solid rgba(255,255,255,.2);
+
+}
 </style>
 
 </head>
@@ -999,6 +1022,85 @@ id="generateTravel">
 </div>
 
 </section>
+  <!-- ========================================= -->
+<!-- 第五章：走時曲線 -->
+<!-- ========================================= -->
+
+<section id="chapter5">
+
+<div class="card">
+
+<h2>📈 第五章：走時曲線</h2>
+
+<p>
+
+漢斯博士：
+
+<br><br>
+
+如果只有一堆數字，
+
+其實很難看出規律。
+
+所以科學家會把
+
+「距離」
+
+和
+
+「到達時間」
+
+畫成圖。
+
+這就是
+
+<strong>走時曲線（Travel Time Curve）</strong>。
+
+</p>
+
+<div class="graphArea">
+
+<canvas
+
+id="travelCanvas"
+
+width="900"
+
+height="500">
+
+</canvas>
+
+</div>
+
+<br>
+
+<div style="text-align:center">
+
+<button
+
+class="accept"
+
+id="drawCurve">
+
+📈 繪製走時曲線
+
+</button>
+
+</div>
+
+<p
+
+id="curveText"
+
+style="margin-top:25px;text-align:center;">
+
+等待開始...
+
+</p>
+
+</div>
+
+</section>
 </footer>
 
 <script>
@@ -1263,6 +1365,89 @@ travelBody.appendChild(row);
 generateTravel.disabled=true;
 
 generateTravel.innerHTML="資料已建立";
+
+}
+  /*======================================
+第五章
+======================================*/
+
+const canvas=document.getElementById("travelCanvas");
+
+const ctx=canvas.getContext("2d");
+
+const drawCurve=document.getElementById("drawCurve");
+
+const curveText=document.getElementById("curveText");
+
+drawCurve.onclick=function(){
+
+ctx.clearRect(0,0,900,500);
+
+ctx.strokeStyle="white";
+
+ctx.lineWidth=2;
+
+/* X軸 */
+
+ctx.beginPath();
+
+ctx.moveTo(80,420);
+
+ctx.lineTo(850,420);
+
+ctx.stroke();
+
+/* Y軸 */
+
+ctx.beginPath();
+
+ctx.moveTo(80,420);
+
+ctx.lineTo(80,50);
+
+ctx.stroke();
+
+/* 標題 */
+
+ctx.font="18px sans-serif";
+
+ctx.fillStyle="white";
+
+ctx.fillText("到達時間",10,60);
+
+ctx.fillText("距離",820,450);
+
+/* 點 */
+
+ctx.strokeStyle="#00e5ff";
+
+ctx.fillStyle="#00e5ff";
+
+ctx.lineWidth=3;
+
+ctx.beginPath();
+
+for(let i=0;i<24;i++){
+
+let x=100+i*30;
+
+let y=390-i*10;
+
+ctx.lineTo(x,y);
+
+ctx.fillRect(x-3,y-3,6,6);
+
+}
+
+ctx.stroke();
+
+curveText.innerHTML=
+
+"🎉 已成功建立第一條走時曲線！";
+
+drawCurve.disabled=true;
+
+drawCurve.innerHTML="完成";
 
 }
 </script>
