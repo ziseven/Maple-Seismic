@@ -642,8 +642,8 @@ background:rgba(255,255,255,.12);
 transition:.3s;
 
 }
-  /*======================================
-第五章
+/*======================================
+第五章 SVG
 ======================================*/
 
 .graphArea{
@@ -654,7 +654,7 @@ overflow:auto;
 
 }
 
-#travelCanvas{
+#travelSVG{
 
 width:100%;
 
@@ -1022,8 +1022,8 @@ id="generateTravel">
 </div>
 
 </section>
-  <!-- ========================================= -->
-<!-- 第五章：走時曲線 -->
+<!-- ========================================= -->
+<!-- 第五章：走時曲線 (SVG) -->
 <!-- ========================================= -->
 
 <section id="chapter5">
@@ -1038,51 +1038,75 @@ id="generateTravel">
 
 <br><br>
 
-如果只有一堆數字，
+科學家會把每支地震儀的資料，
 
-其實很難看出規律。
+畫成「距離－時間」圖。
 
-所以科學家會把
+請按下按鈕，
 
-「距離」
-
-和
-
-「到達時間」
-
-畫成圖。
-
-這就是
-
-<strong>走時曲線（Travel Time Curve）</strong>。
+看看走時曲線是如何形成的。
 
 </p>
 
 <div class="graphArea">
 
-<canvas
+<svg id="travelSVG" viewBox="0 0 900 500">
 
-id="travelCanvas"
+<!-- X軸 -->
+<line x1="80" y1="420" x2="850" y2="420"
+stroke="white" stroke-width="3"/>
 
-width="900"
+<!-- Y軸 -->
+<line x1="80" y1="420" x2="80" y2="50"
+stroke="white" stroke-width="3"/>
 
-height="500">
+<text x="840" y="455"
+fill="white"
+font-size="20">
 
-</canvas>
+距離
+
+</text>
+
+<text x="10" y="40"
+fill="white"
+font-size="20">
+
+時間
+
+</text>
+
+<g id="pointGroup"></g>
+
+<polyline
+
+id="travelLine"
+
+fill="none"
+
+stroke="#00E5FF"
+
+stroke-width="5"
+
+points="">
+
+</polyline>
+
+</svg>
 
 </div>
 
 <br>
 
-<div style="text-align:center">
+<div style="text-align:center;">
 
 <button
 
 class="accept"
 
-id="drawCurve">
+id="drawTravel">
 
-📈 繪製走時曲線
+📈 建立走時曲線
 
 </button>
 
@@ -1090,9 +1114,9 @@ id="drawCurve">
 
 <p
 
-id="curveText"
+id="travelInfo"
 
-style="margin-top:25px;text-align:center;">
+style="margin-top:20px;text-align:center;">
 
 等待開始...
 
@@ -1367,87 +1391,69 @@ generateTravel.disabled=true;
 generateTravel.innerHTML="資料已建立";
 
 }
-  /*======================================
-第五章
+/*======================================
+第五章 SVG
 ======================================*/
 
-const canvas=document.getElementById("travelCanvas");
+const drawTravel=document.getElementById("drawTravel");
 
-const ctx=canvas.getContext("2d");
+const pointGroup=document.getElementById("pointGroup");
 
-const drawCurve=document.getElementById("drawCurve");
+const travelLine=document.getElementById("travelLine");
 
-const curveText=document.getElementById("curveText");
+const travelInfo=document.getElementById("travelInfo");
 
-drawCurve.onclick=function(){
+drawTravel.onclick=function(){
 
-ctx.clearRect(0,0,900,500);
+pointGroup.innerHTML="";
 
-ctx.strokeStyle="white";
+travelLine.setAttribute("points","");
 
-ctx.lineWidth=2;
-
-/* X軸 */
-
-ctx.beginPath();
-
-ctx.moveTo(80,420);
-
-ctx.lineTo(850,420);
-
-ctx.stroke();
-
-/* Y軸 */
-
-ctx.beginPath();
-
-ctx.moveTo(80,420);
-
-ctx.lineTo(80,50);
-
-ctx.stroke();
-
-/* 標題 */
-
-ctx.font="18px sans-serif";
-
-ctx.fillStyle="white";
-
-ctx.fillText("到達時間",10,60);
-
-ctx.fillText("距離",820,450);
-
-/* 點 */
-
-ctx.strokeStyle="#00e5ff";
-
-ctx.fillStyle="#00e5ff";
-
-ctx.lineWidth=3;
-
-ctx.beginPath();
+let points=[];
 
 for(let i=0;i<24;i++){
 
-let x=100+i*30;
+let x=110+i*30;
 
-let y=390-i*10;
+let y=395-i*10;
 
-ctx.lineTo(x,y);
+let c=document.createElementNS(
 
-ctx.fillRect(x-3,y-3,6,6);
+"http://www.w3.org/2000/svg",
+
+"circle"
+
+);
+
+c.setAttribute("cx",x);
+
+c.setAttribute("cy",y);
+
+c.setAttribute("r",5);
+
+c.setAttribute("fill","#00E5FF");
+
+pointGroup.appendChild(c);
+
+points.push(x+","+y);
 
 }
 
-ctx.stroke();
+travelLine.setAttribute(
 
-curveText.innerHTML=
+"points",
 
-"🎉 已成功建立第一條走時曲線！";
+points.join(" ")
 
-drawCurve.disabled=true;
+);
 
-drawCurve.innerHTML="完成";
+travelInfo.innerHTML=
+
+"🎉 已完成第一條走時曲線！";
+
+drawTravel.disabled=true;
+
+drawTravel.innerHTML="完成";
 
 }
 </script>
