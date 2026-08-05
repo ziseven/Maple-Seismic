@@ -665,6 +665,29 @@ border-radius:20px;
 border:2px solid rgba(255,255,255,.2);
 
 }
+  /*======================================
+第六章
+======================================*/
+
+.layerArea{
+
+margin-top:40px;
+
+overflow:auto;
+
+}
+
+#layerSVG{
+
+width:100%;
+
+background:#18314d;
+
+border-radius:20px;
+
+border:2px solid rgba(255,255,255,.2);
+
+}
 </style>
 
 </head>
@@ -1125,6 +1148,152 @@ style="margin-top:20px;text-align:center;">
 </div>
 
 </section>
+  <!-- ========================================= -->
+<!-- 第六章：地下世界 -->
+<!-- ========================================= -->
+
+<section id="chapter6">
+
+<div class="card">
+
+<h2>🌍 第六章：地下世界其實有兩層</h2>
+
+<p>
+
+🧙 漢斯博士：
+
+<br><br>
+
+在楓之谷中，不同地圖有不同的移動速度。
+
+地下世界也是一樣。
+
+不同的岩層，會讓地震波跑得不一樣快。
+
+</p>
+
+<div class="layerArea">
+
+<svg id="layerSVG" viewBox="0 0 900 520">
+
+<!-- 第一層 -->
+<rect
+x="0"
+y="120"
+width="900"
+height="180"
+fill="#5DAE6F">
+</rect>
+
+<!-- 第二層 -->
+<rect
+x="0"
+y="300"
+width="900"
+height="220"
+fill="#777777">
+</rect>
+
+<!-- 分界線 -->
+<line
+x1="0"
+y1="300"
+x2="900"
+y2="300"
+stroke="white"
+stroke-width="3"
+stroke-dasharray="10 8">
+</line>
+
+<!-- 標題 -->
+<text
+x="25"
+y="90"
+fill="white"
+font-size="26">
+
+🌱 第一層（土壤）
+速度：慢
+
+</text>
+
+<text
+x="25"
+y="340"
+fill="white"
+font-size="26">
+
+🪨 第二層（岩盤）
+速度：快
+
+</text>
+
+<!-- 地震波 -->
+
+<circle
+id="waveBall"
+
+cx="100"
+
+cy="170"
+
+r="10"
+
+fill="#00E5FF">
+
+</circle>
+
+<!-- 路徑 -->
+
+<polyline
+
+id="wavePath"
+
+points=""
+
+fill="none"
+
+stroke="#00E5FF"
+
+stroke-width="5"
+
+stroke-linecap="round">
+
+</polyline>
+
+</svg>
+
+</div>
+
+<br>
+
+<div style="text-align:center;">
+
+<button
+
+class="accept"
+
+id="startWave">
+
+🌊 發射地震波
+
+</button>
+
+</div>
+
+<p
+
+id="waveExplain"
+
+style="margin-top:25px;text-align:center;">
+
+等待開始...
+
+</p>
+
+</div>
+
+</section>
 </footer>
 
 <script>
@@ -1454,6 +1623,99 @@ travelInfo.innerHTML=
 drawTravel.disabled=true;
 
 drawTravel.innerHTML="完成";
+
+}
+  /*======================================
+第六章
+======================================*/
+
+const startWave=document.getElementById("startWave");
+
+const waveBall=document.getElementById("waveBall");
+
+const wavePath=document.getElementById("wavePath");
+
+const waveExplain=document.getElementById("waveExplain");
+
+startWave.onclick=function(){
+
+startWave.disabled=true;
+
+let step=0;
+
+const path=[];
+
+const timer=setInterval(()=>{
+
+step++;
+
+let x=100+step*5;
+let y=170;
+
+if(step<25){
+
+// 第一層水平前進
+
+x=100+step*8;
+y=170;
+
+waveExplain.innerHTML=
+
+"🌱 地震波正在第一層（土壤）傳播...";
+
+}
+
+else if(step<45){
+
+// 往下
+
+x=300+(step-25)*4;
+y=170+(step-25)*7;
+
+waveExplain.innerHTML=
+
+"⬇️ 地震波碰到第二層！";
+
+}
+
+else{
+
+// 第二層高速前進
+
+x=380+(step-45)*10;
+y=310;
+
+waveExplain.innerHTML=
+
+"🪨 第二層速度比較快！";
+
+}
+
+waveBall.setAttribute("cx",x);
+
+waveBall.setAttribute("cy",y);
+
+path.push(x+","+y);
+
+wavePath.setAttribute(
+
+"points",
+
+path.join(" ")
+
+);
+
+if(step>70){
+
+clearInterval(timer);
+
+waveExplain.innerHTML=
+
+"🎉 發現：第二層速度比第一層快！";
+
+}
+
+},40);
 
 }
 </script>
