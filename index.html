@@ -643,33 +643,10 @@ transition:.3s;
 
 }
 /*======================================
-第五章 SVG
-======================================*/
-
-.graphArea{
-
-margin-top:40px;
-
-overflow:auto;
-
-}
-
-#travelSVG{
-
-width:100%;
-
-background:#13263f;
-
-border-radius:20px;
-
-border:2px solid rgba(255,255,255,.2);
-
-}
-  /*======================================
 第六章
 ======================================*/
 
-.layerArea{
+.layerBox{
 
 margin-top:40px;
 
@@ -681,7 +658,7 @@ overflow:auto;
 
 width:100%;
 
-background:#18314d;
+background:#13263f;
 
 border-radius:20px;
 
@@ -1148,7 +1125,7 @@ style="margin-top:20px;text-align:center;">
 </div>
 
 </section>
-  <!-- ========================================= -->
+<!-- ========================================= -->
 <!-- 第六章：地下世界 -->
 <!-- ========================================= -->
 
@@ -1156,110 +1133,148 @@ style="margin-top:20px;text-align:center;">
 
 <div class="card">
 
-<h2>🌍 第六章：地下世界其實有兩層</h2>
+<h2>🌍 第六章：地下世界</h2>
 
 <p>
 
 🧙 漢斯博士：
 
-<br><br>
+地下不是只有一層。
 
-在楓之谷中，不同地圖有不同的移動速度。
-
-地下世界也是一樣。
-
-不同的岩層，會讓地震波跑得不一樣快。
+折射震測最重要的概念，就是不同地層的波速不同。
 
 </p>
 
-<div class="layerArea">
+<div class="layerBox">
 
-<svg id="layerSVG" viewBox="0 0 900 520">
+<svg id="layerSVG"
+viewBox="0 0 900 450">
 
 <!-- 第一層 -->
+
 <rect
+
 x="0"
-y="120"
+
+y="0"
+
 width="900"
-height="180"
-fill="#5DAE6F">
+
+height="220"
+
+fill="#6CC070">
+
 </rect>
 
 <!-- 第二層 -->
+
 <rect
+
 x="0"
-y="300"
+
+y="220"
+
 width="900"
-height="220"
-fill="#777777">
+
+height="230"
+
+fill="#777">
+
 </rect>
 
-<!-- 分界線 -->
+<!-- 分界 -->
+
 <line
+
 x1="0"
-y1="300"
+
+y1="220"
+
 x2="900"
-y2="300"
+
+y2="220"
+
 stroke="white"
+
 stroke-width="3"
-stroke-dasharray="10 8">
+
+stroke-dasharray="12 10">
+
 </line>
 
-<!-- 標題 -->
+<!-- 文字 -->
+
 <text
-x="25"
-y="90"
+
+x="20"
+
+y="45"
+
 fill="white"
-font-size="26">
+
+font-size="24">
 
 🌱 第一層（土壤）
+
+</text>
+
+<text
+
+x="20"
+
+y="80"
+
+fill="white"
+
+font-size="20">
+
 速度：慢
 
 </text>
 
 <text
-x="25"
-y="340"
+
+x="20"
+
+y="270"
+
 fill="white"
-font-size="26">
+
+font-size="24">
 
 🪨 第二層（岩盤）
+
+</text>
+
+<text
+
+x="20"
+
+y="305"
+
+fill="white"
+
+font-size="20">
+
 速度：快
 
 </text>
 
-<!-- 地震波 -->
+<!-- 波 -->
 
 <circle
-id="waveBall"
 
-cx="100"
+id="wavePoint"
 
-cy="170"
+cx="120"
+
+cy="120"
 
 r="10"
 
 fill="#00E5FF">
 
 </circle>
-
-<!-- 路徑 -->
-
-<polyline
-
-id="wavePath"
-
-points=""
-
-fill="none"
-
-stroke="#00E5FF"
-
-stroke-width="5"
-
-stroke-linecap="round">
-
-</polyline>
 
 </svg>
 
@@ -1273,9 +1288,9 @@ stroke-linecap="round">
 
 class="accept"
 
-id="startWave">
+id="moveWave">
 
-🌊 發射地震波
+🌊 播放動畫
 
 </button>
 
@@ -1283,9 +1298,9 @@ id="startWave">
 
 <p
 
-id="waveExplain"
+id="layerMessage"
 
-style="margin-top:25px;text-align:center;">
+style="margin-top:20px;text-align:center;">
 
 等待開始...
 
@@ -1625,99 +1640,61 @@ drawTravel.disabled=true;
 drawTravel.innerHTML="完成";
 
 }
-  /*======================================
+/*======================================
 第六章
 ======================================*/
 
-const startWave=document.getElementById("startWave");
+document.addEventListener("DOMContentLoaded",()=>{
 
-const waveBall=document.getElementById("waveBall");
+const btn=document.getElementById("moveWave");
 
-const wavePath=document.getElementById("wavePath");
+const point=document.getElementById("wavePoint");
 
-const waveExplain=document.getElementById("waveExplain");
+const msg=document.getElementById("layerMessage");
 
-startWave.onclick=function(){
+if(!btn || !point) return;
 
-startWave.disabled=true;
+btn.addEventListener("click",()=>{
 
-let step=0;
+msg.innerHTML="🌱 第一層速度較慢...";
 
-const path=[];
+point.setAttribute("cx",120);
+point.setAttribute("cy",120);
 
-const timer=setInterval(()=>{
+setTimeout(()=>{
 
-step++;
+point.setAttribute("cx",320);
+point.setAttribute("cy",120);
 
-let x=100+step*5;
-let y=170;
+},500);
 
-if(step<25){
+setTimeout(()=>{
 
-// 第一層水平前進
+msg.innerHTML="⬇️ 地震波進入第二層";
 
-x=100+step*8;
-y=170;
+point.setAttribute("cx",420);
+point.setAttribute("cy",220);
 
-waveExplain.innerHTML=
+},1000);
 
-"🌱 地震波正在第一層（土壤）傳播...";
+setTimeout(()=>{
 
-}
+msg.innerHTML="🪨 第二層速度較快！";
 
-else if(step<45){
+point.setAttribute("cx",760);
+point.setAttribute("cy",300);
 
-// 往下
+},1500);
 
-x=300+(step-25)*4;
-y=170+(step-25)*7;
+setTimeout(()=>{
 
-waveExplain.innerHTML=
+msg.innerHTML="🎉 地震波在第二層前進得更快。";
 
-"⬇️ 地震波碰到第二層！";
+},2000);
 
-}
+});
 
-else{
-
-// 第二層高速前進
-
-x=380+(step-45)*10;
-y=310;
-
-waveExplain.innerHTML=
-
-"🪨 第二層速度比較快！";
-
-}
-
-waveBall.setAttribute("cx",x);
-
-waveBall.setAttribute("cy",y);
-
-path.push(x+","+y);
-
-wavePath.setAttribute(
-
-"points",
-
-path.join(" ")
-
-);
-
-if(step>70){
-
-clearInterval(timer);
-
-waveExplain.innerHTML=
-
-"🎉 發現：第二層速度比第一層快！";
-
-}
-
-},40);
-
-}
+});
 </script>
 
 </body>
