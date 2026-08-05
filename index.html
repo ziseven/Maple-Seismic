@@ -595,6 +595,53 @@ background:#ffca28;
 color:#222;
 
 }
+  /*======================================
+第四章
+======================================*/
+
+.travelTable{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:40px;
+
+}
+
+.travelTable th{
+
+background:#ffd54f;
+
+color:#222;
+
+padding:15px;
+
+}
+
+.travelTable td{
+
+padding:14px;
+
+text-align:center;
+
+border-bottom:1px solid rgba(255,255,255,.15);
+
+}
+
+.travelTable tr:nth-child(even){
+
+background:rgba(255,255,255,.05);
+
+}
+
+.travelTable tr:hover{
+
+background:rgba(255,255,255,.12);
+
+transition:.3s;
+
+}
 </style>
 
 </head>
@@ -883,6 +930,75 @@ style="margin-top:25px;text-align:center;">
 </div>
 
 </section>
+  <!-- ========================================= -->
+<!-- 第四章：走時觀察 -->
+<!-- ========================================= -->
+
+<section id="chapter4">
+
+<div class="card">
+
+<h2>⏱️ 第四章：觀察地震波到達時間</h2>
+
+<p>
+
+漢斯博士：
+
+<br><br>
+
+剛才 24 支地震儀依序收到訊號。
+
+你有沒有發現？
+
+離震源越遠，
+
+收到地震波的時間通常越晚。
+
+這就是「走時（Travel Time）」。
+
+</p>
+
+<table class="travelTable">
+
+<thead>
+
+<tr>
+
+<th>地震儀</th>
+
+<th>距離(m)</th>
+
+<th>到達時間(ms)</th>
+
+</tr>
+
+</thead>
+
+<tbody id="travelBody">
+
+</tbody>
+
+</table>
+
+<br>
+
+<div style="text-align:center">
+
+<button
+
+class="accept"
+
+id="generateTravel">
+
+📈 產生走時資料
+
+</button>
+
+</div>
+
+</div>
+
+</section>
 </footer>
 
 <script>
@@ -1108,6 +1224,45 @@ sensorMessage.innerHTML=
 }
 
 },250);
+
+}
+  /*======================================
+第四章
+======================================*/
+
+const travelBody=document.getElementById("travelBody");
+
+const generateTravel=document.getElementById("generateTravel");
+
+generateTravel.onclick=function(){
+
+travelBody.innerHTML="";
+
+for(let i=1;i<=24;i++){
+
+let distance=i*5;
+
+let time=(distance/5).toFixed(1);
+
+let row=document.createElement("tr");
+
+row.innerHTML=`
+
+<td>G${i}</td>
+
+<td>${distance}</td>
+
+<td>${time}</td>
+
+`;
+
+travelBody.appendChild(row);
+
+}
+
+generateTravel.disabled=true;
+
+generateTravel.innerHTML="資料已建立";
 
 }
 </script>
